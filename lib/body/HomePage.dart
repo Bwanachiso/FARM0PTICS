@@ -103,20 +103,20 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.work),
+            label: 'Labor & Resource management',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.monetization_on),
+            label: 'Labor and Resource management',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.chat_rounded),
+            label: 'Chart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
-            label: 'More',
+            label: 'Comments',
           ),
         ],
         currentIndex: _selectedIndex,
