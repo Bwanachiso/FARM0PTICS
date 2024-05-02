@@ -75,9 +75,10 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                _getCardTitle(index),
-                textAlign: TextAlign.center,
+              Image.asset(
+                _getCardImage(index),
+                width: 100,
+                height: 100,
               ),
               GestureDetector(
                 onTap: () {
@@ -86,7 +87,7 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
                 child: Card(
                   child: Center(
                     child: Text(
-                      'Tap here',
+                      _getCardTitle(index),
                     ),
                   ),
                 ),
@@ -135,6 +136,21 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
         return 'LABOUR MANAGEMENT';
       case 3:
         return 'RESOURCE MANAGEMENT';
+      default:
+        return '';
+    }
+  }
+
+  String _getCardImage(int index) {
+    switch (index) {
+      case 0:
+        return 'lib/images/Crop farming.jpg';
+      case 1:
+        return 'lib/images/animal farming.jpg';
+      case 2:
+        return 'lib/images/Labor management.jpg';
+      case 3:
+        return 'lib/images/Resource management.jpg';
       default:
         return '';
     }
