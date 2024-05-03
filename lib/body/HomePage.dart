@@ -373,8 +373,55 @@ class ThirdScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Labour Management'),
       ),
-      body: Center(
-        child: Text('Labour Management Content'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Labor Management in Farming:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Labor management in the context of farming involves the strategic organization and supervision of labor resources to optimize productivity and efficiency on the farm. It encompasses tasks such as recruitment, training, motivation, communication, delegation, and maintaining good labor relations. The primary goal of labor management in farming is to enhance human resource utilization, increase labor productivity, and ultimately boost profitability for the farm enterprise.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Benefits of Effective Labor Management:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '1. Efficient Resource Utilization: By planning, organizing, and controlling labor resources effectively, farms can ensure that human resources are utilized optimally, leading to increased productivity.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '2. Improved Productivity: Proper management practices, such as assigning tasks according to capabilities, providing incentives, and training workers, can enhance productivity levels, resulting in higher yields and outputs.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '3. Cost Control: Managing labor efficiently can help control labor costs, which typically constitute a significant portion of production expenses in agriculture.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '4. Enhanced Worker Performance: Motivated and well-managed workers tend to perform better, leading to improved quality of work, reduced errors, and increased output.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '5. Long-Term Sustainability: By fostering good labor relations, providing fair remuneration, and offering opportunities for growth and development, farms can create a positive work environment that encourages retention of skilled labor, contributing to long-term success and profitability.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'In summary, labor management in farming involves the strategic coordination of human resources to achieve operational efficiency, increase productivity, and ultimately drive profitability for the farm enterprise. By implementing sound labor management practices, farms can optimize their workforce, reduce costs, improve output quality, and create a conducive work environment that benefits both the farmer and the workers.',
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -387,8 +434,77 @@ class FourthScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Resource Management'),
       ),
-      body: Center(
-        child: Text('Resource Management Content'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Resource Management in Farming:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Resource management in the context of farming refers to the strategic planning, organization, and control of various agricultural resources to achieve optimal productivity, profitability, and sustainability. The key purpose of resource management in farming is to ensure the efficient and effective utilization of limited resources, such as land, water, labor, capital, and inputs, to meet the farm\'s objectives.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Benefits of Effective Resource Management:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '- Increased Productivity: Proper allocation and utilization of resources can lead to higher crop yields, better livestock performance, and overall increased agricultural output. Efficient management of inputs like fertilizers, pesticides, and water can enhance the efficiency of production processes.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Cost Optimization: Careful management of resources can help minimize waste, reduce input costs, and optimize the use of available resources. This can lead to improved profitability and financial sustainability for the farm.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Sustainability: Resource management practices that focus on long-term sustainability, such as soil conservation, water management, and biodiversity preservation, can ensure the continued viability of the farming system. This helps maintain the productive capacity of the land and natural resources for future generations.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Risk Mitigation: Effective resource management can help farmers anticipate and mitigate risks associated with factors like weather, pests, and market fluctuations. This can improve the farm\'s resilience and ability to withstand and recover from various challenges.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Key Functionalities of Resource Management:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '- Land Management: Optimizing the use of available land, including crop rotation, intercropping, and soil conservation practices. Ensuring sustainable land-use practices to maintain soil fertility and prevent degradation.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Water Management: Efficient irrigation systems, water conservation techniques, and water quality management. Addressing issues like water scarcity, waterlogging, and salinization.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Labor Management: Effective planning, organization, and utilization of farm labor to maximize productivity. Providing training, incentives, and good working conditions to enhance worker performance.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Input Management: Efficient use of agricultural inputs like fertilizers, pesticides, and seeds to optimize yields and minimize environmental impact. Adopting precision farming techniques and technologies to enhance input-use efficiency.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '- Capital Management: Effective financial planning, budgeting, and investment decisions to ensure the farm\'s financial viability and growth. Accessing and managing various sources of capital, such as loans, grants, and investments.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'By implementing comprehensive resource management practices, farmers can optimize the use of their available resources, improve overall farm performance, and ensure the long-term sustainability of their agricultural operations.',
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

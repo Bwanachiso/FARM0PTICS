@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title', // Optional: Add your app title
+      title: 'FARMOPTICS', // Optional: Add your app title
       theme: ThemeData(
         primarySwatch: Colors.blue, // Optional: Customize your app theme
       ),
