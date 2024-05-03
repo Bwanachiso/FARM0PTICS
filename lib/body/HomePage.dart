@@ -164,8 +164,100 @@ class FirstScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Crop Farming'),
       ),
-      body: Center(
-        child: Text('Crop Farming Content'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Crop farming refers to the cultivation and harvesting of plants for various purposes, such as food, feed, fiber, oil, ornamental uses, and industrial applications. Here is an explanation of crop farming and 10 examples of crop farming:',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Crop farming is the primary agricultural activity that involves growing and harvesting plants on a large scale. Farmers carefully select and cultivate specific plant species based on factors such as climate, soil conditions, market demand, and intended use. The main goals of crop farming are to maximize yields, ensure food security, and generate economic returns.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Some key aspects of crop farming include:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '1. Preparing the land through plowing, tilling, and fertilizing',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '2. Selecting and planting appropriate crop varieties',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '3. Providing water through irrigation or relying on natural rainfall',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '4. Managing pests, weeds, and diseases to protect the crops',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '5. Harvesting the mature crops at the right time',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '6. Processing, storing, and distributing the harvested crops',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                '10 examples of common crop farming practices:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '1. Wheat farming - Wheat is a staple food grain cultivated worldwide.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '2. Rice farming - Rice is a major food crop, especially in Asia.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '3. Corn (maize) farming - Corn is used for food, animal feed, and industrial products.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '4. Soybean farming - Soybeans are grown for their oil and protein-rich seeds.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '5. Cotton farming - Cotton is a fiber crop used in the textile industry.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '6. Sugarcane farming - Sugarcane is grown to produce sugar and other sweeteners.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '7. Potato farming - Potatoes are an important food crop grown globally.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '8. Fruit farming - Fruits like apples, oranges, and bananas are cultivated commercially.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '9. Vegetable farming - A wide variety of vegetables are grown for human consumption.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '10. Tobacco farming - Tobacco is an industrial crop used in cigarettes and other products.',
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -178,8 +270,97 @@ class SecondScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Animal Farming'),
       ),
-      body: Center(
-        child: Text('Animal Farming Content'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Overview of Animal Farming:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'What is Animal Farming?',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'Animal farming is the practice of rearing and managing animals for food requirements like meat, milk, and eggs, as well as for other purposes such as plowing, transportation, and producing materials like wool and leather. It is an integral part of agriculture and has been a fundamental aspect of human society for centuries.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Benefits of Animal Farming:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '1. Food Production: Livestock farming provides a significant source of protein and essential nutrients through products like meat, milk, and eggs.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '2. Economic Value: Animal farming creates job opportunities, generates revenue, and contributes to the economy.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '3. Sustainability: It is a sustainable practice that supports food security and provides a range of products beyond food, such as leather, wool, and fertilizer.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '4. Environmental Sustainability: Livestock farming can help maintain environmental sustainability by converting waste into nutrient-dense foods and aiding in soil fertility.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '5. Cultural Importance: Animals have been essential for human survival and have cultural significance in many societies.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Different Types of Animal Farming:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '1. Cattle Farming: Involves rearing cattle for meat and milk production, as well as for labor purposes like plowing and irrigation.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '2. Poultry Farming: Focuses on raising birds like chickens for meat and eggs.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '3. Fish Farming: Involves raising fish for consumption and other products.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '4. Dairy Farming: Primarily focuses on producing milk for human consumption.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '5. Buffalo Farming: Includes rearing buffaloes for milk, meat, hides, and bones.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '6. Pig Farming: Involves raising pigs for meat production.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '7. Precision Livestock Farming: Utilizes technology to manage livestock health, welfare, and productivity efficiently.',
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                '8. Extensive Farming: Allows livestock to roam freely in pastures and feeding areas.',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'In conclusion, animal farming is a diverse and essential practice that contributes significantly to food production, economic growth, and sustainability. By understanding its various types and benefits, we appreciate the vital role that animal farming plays in meeting human needs and supporting livelihoods worldwide.',
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
