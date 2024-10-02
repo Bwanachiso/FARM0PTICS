@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../body/HomePage.dart';
+import '../components/Body.dart';
 import 'signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //  the authentication and login logic is handled.
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => FarmopticsHomePage()),
+      MaterialPageRoute(builder: (context) => const MainScreen()),
     );
   }
 

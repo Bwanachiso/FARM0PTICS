@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/bottom_navigation_bar.dart';
 import 'FirstScreen.dart';
 import 'SecondScreen.dart';
 import 'ThirdScreen.dart';
 import 'FourthScreen.dart';
-import 'labormanagement.dart';
-import 'resourcemanagement.dart';
 // Import the BottomNavBar
 
 void main() {
@@ -115,10 +112,10 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+      // bottomNavigationBar: BottomNavBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: _onItemTapped,
+      // ),
     );
   }
 

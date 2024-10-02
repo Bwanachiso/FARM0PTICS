@@ -6,9 +6,6 @@ class comments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('comments'),
-      ),
       body: Center(
         child: Text('comments Content'),
       ),
