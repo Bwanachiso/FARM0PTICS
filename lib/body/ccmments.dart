@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(FarmopticsApp());
 }
-// sdse
 
 class FarmopticsApp extends StatelessWidget {
   @override
