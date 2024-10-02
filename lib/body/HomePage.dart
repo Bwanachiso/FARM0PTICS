@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import '../components/bottom_navigation_bar.dart';
 import 'FirstScreen.dart';
 import 'SecondScreen.dart';
 import 'ThirdScreen.dart';
 import 'FourthScreen.dart';
+import 'labormanagement.dart';
+import 'resourcemanagement.dart';
+// Import the BottomNavBar
 
 void main() {
   runApp(FarmopticsApp());
@@ -76,56 +80,44 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
         ),
         itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                _getCardImage(index),
-                width: 100,
-                height: 100,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _onCardTapped(context, index);
-                },
-                child: Card(
-                  child: Center(
-                    child: Text(
-                      _getCardTitle(index),
+          return Card(
+            elevation: 5, // Add shadow effect
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10), // Rounded corners
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  _getCardImage(index),
+                  width: 100,
+                  height: 100,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _onCardTapped(context, index);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0), // Padding around text
+                    child: Center(
+                      child: Text(
+                        _getCardTitle(index),
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight
+                                .bold), // Increased font size and bold
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.work),
-            label: 'Labor & Resource management',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.monetization_on),
-            label: 'Labor and Resource management',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_rounded),
-            label: 'Chart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: 'Comments',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      bottomNavigationBar: BottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

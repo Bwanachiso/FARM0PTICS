@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './body/HomePage.dart'; // Ensure this is the correct path for HomePage
+// Ensure this is the correct path for HomePage
 import './auth/login.dart'; // Ensure this is the correct path for LoginScreen
 
 void main() {
