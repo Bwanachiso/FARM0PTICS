@@ -1,7 +1,9 @@
+import 'package:farmoptics/body/HomePage.dart';
 import 'package:flutter/material.dart';
 import '../custom_textfield.dart';
 import '../services/auth_services.dart';
-import 'home_screen.dart'; // Ensure you have this import for the HomeScreen
+
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context: context,
       email: emailController.text,
       password: passwordController.text,
-      nextScreen: HomeScreen(), // Navigation to HomeScreen after login
+      nextScreen: const FarmopticsApp(), // Navigation to HomeScreen after login
     );
   }
 
@@ -65,6 +67,20 @@ class _LoginScreenState extends State<LoginScreen> {
             child: const Text(
               "Login",
               style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+          const SizedBox(height: 20), // Adds space between buttons
+          TextButton(
+            onPressed: () {
+              // Navigate to the signup screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignupScreen()),
+              );
+            },
+            child: const Text(
+              "Don't have an account? Sign Up",
+              style: TextStyle(color: Colors.blue),
             ),
           ),
         ],
