@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../providers/user_provider.dart';
+import '../services/auth_services.dart';
+import 'package:provider/provider.dart';
 import 'FirstScreen.dart';
 import 'SecondScreen.dart';
 import 'ThirdScreen.dart';
 import 'FourthScreen.dart';
-// Import the BottomNavBar
 
 void main() {
   runApp(const FarmopticsApp());
@@ -69,57 +71,76 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
     }
   }
 
+  void signOutUser(BuildContext context) {
+    AuthService().signOut(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('FARMOPTICS'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => signOutUser(context),
+          ),
+        ],
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemCount: 4,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            elevation: 5, // Add shadow effect
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (user != null) ...[
+            Text('ID: ${user.id}'),
+            Text('Email: ${user.email}'),
+            Text('Name: ${user.name}'),
+            const SizedBox(height: 20),
+          ],
+          GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  _getCardImage(index),
-                  width: 100,
-                  height: 100,
+            itemCount: 4,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    _onCardTapped(context, index);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0), // Padding around text
-                    child: Center(
-                      child: Text(
-                        _getCardTitle(index),
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight
-                                .bold), // Increased font size and bold
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      _getCardImage(index),
+                      width: 100,
+                      height: 100,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _onCardTapped(context, index);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Center(
+                          child: Text(
+                            _getCardTitle(index),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ],
       ),
-      // bottomNavigationBar: BottomNavBar(
-      //   selectedIndex: _selectedIndex,
-      //   onItemTapped: _onItemTapped,
-      // ),
     );
   }
 
