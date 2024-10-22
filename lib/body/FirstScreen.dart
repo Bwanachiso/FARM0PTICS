@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
 
 class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crop Farming'),
+        title: const Text('Crop Farming'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
-          children: [
+          children: const [
             ExpansionTile(
               title: Text(
                 'Definition of Crop Farming',
@@ -19,7 +20,7 @@ class FirstScreen extends StatelessWidget {
               ),
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Crop farming refers to the cultivation and harvesting of plants for various purposes, such as food, feed, fiber, oil, ornamental uses, and industrial applications. Here is an explanation of crop farming and 10 examples of crop farming:\n\n'
                     'Crop farming is the primary agricultural activity that involves growing and harvesting plants on a large scale. Farmers carefully select and cultivate specific plant species based on factors such as climate, soil conditions, market demand, and intended use. The main goals of crop farming are to maximize yields, ensure food security, and generate economic returns.',
@@ -35,7 +36,7 @@ class FirstScreen extends StatelessWidget {
               ),
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,7 +82,7 @@ class FirstScreen extends StatelessWidget {
               ),
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

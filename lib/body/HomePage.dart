@@ -6,10 +6,12 @@ import 'FourthScreen.dart';
 // Import the BottomNavBar
 
 void main() {
-  runApp(FarmopticsApp());
+  runApp(const FarmopticsApp());
 }
 
 class FarmopticsApp extends StatelessWidget {
+  const FarmopticsApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,12 +19,14 @@ class FarmopticsApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FarmopticsHomePage(),
+      home: const FarmopticsHomePage(),
     );
   }
 }
 
 class FarmopticsHomePage extends StatefulWidget {
+  const FarmopticsHomePage({super.key});
+
   @override
   _FarmopticsHomePageState createState() => _FarmopticsHomePageState();
 }
@@ -41,25 +45,25 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FirstScreen()),
+          MaterialPageRoute(builder: (context) => const FirstScreen()),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SecondScreen()),
+          MaterialPageRoute(builder: (context) => const SecondScreen()),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ThirdScreen()),
+          MaterialPageRoute(builder: (context) => const ThirdScreen()),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FourthScreen()),
+          MaterialPageRoute(builder: (context) => const FourthScreen()),
         );
         break;
     }
@@ -69,10 +73,10 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FARMOPTICS'),
+        title: const Text('FARMOPTICS'),
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
         itemCount: 4,
@@ -99,7 +103,7 @@ class _FarmopticsHomePageState extends State<FarmopticsHomePage> {
                     child: Center(
                       child: Text(
                         _getCardTitle(index),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight
                                 .bold), // Increased font size and bold

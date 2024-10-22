@@ -19,11 +19,11 @@ class _MainScreenState extends State<MainScreen> {
   final PageController _pageController = PageController();
 
   final List<Widget> _pages = [
-    FarmopticsApp(),
-    Labormananagment(),
-    Resourcemangement(),
-    comments(),
-    SettingsScreen(),
+    const FarmopticsApp(),
+    const Labormananagment(),
+    const Resourcemangement(),
+    const comments(),
+    const SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
