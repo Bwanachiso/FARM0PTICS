@@ -31,7 +31,7 @@ class _AiChatState extends State<AiChat> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "smart farm",
+          "AI farm Asisitant",
         ),
       ),
       body: _buildUI(),
