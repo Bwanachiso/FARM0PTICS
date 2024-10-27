@@ -8,9 +8,7 @@ class Resourcemangement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Resource Management Content'),
-      ),
+      body: Center(),
     );
   }
 }
