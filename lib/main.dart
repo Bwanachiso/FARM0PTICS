@@ -22,14 +22,19 @@
 //   }
 // }
 
+import 'package:farmoptics/components/consts.dart';
 import 'package:farmoptics/xxscreens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import '../providers/user_provider.dart';
 
 import '../services/auth_services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  Gemini.init(
+    apiKey: GEMINI_API_KEY,
+  );
   runApp(
     MultiProvider(
       providers: [
