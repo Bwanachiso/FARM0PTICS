@@ -1,4 +1,4 @@
-import 'package:farmoptics/body/HomePage.dart';
+import 'package:farmoptics/components/Body.dart';
 import 'package:flutter/material.dart';
 import '../custom_textfield.dart';
 import '../services/auth_services.dart';
@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context: context,
       email: emailController.text,
       password: passwordController.text,
-      nextScreen: const FarmopticsApp(), // Navigation to HomeScreen after login
+      nextScreen: const MainScreen(), // Navigation to HomeScreen after login
     );
   }
 
