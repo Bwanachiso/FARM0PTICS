@@ -20,9 +20,9 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     FarmopticsApp(),
-    Labormananagment(),
-    Resourcemangement(),
-    comments(),
+    LaborManagement(),
+    ResourceManagement(),
+    Comments(),
     SettingsScreen(),
   ];
 

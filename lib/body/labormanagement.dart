@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Labormananagment());
+  runApp(LaborManagement());
 }
 
-class Labormananagment extends StatefulWidget {
+class LaborManagement extends StatelessWidget {
   @override
-  _LabormananagmentState createState() => _LabormananagmentState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LaborManagementHome(),
+    );
+  }
 }
 
-class _LabormananagmentState extends State<Labormananagment> {
+class LaborManagementHome extends StatefulWidget {
+  @override
+  _LaborManagementHomeState createState() => _LaborManagementHomeState();
+}
+
+class _LaborManagementHomeState extends State<LaborManagementHome> {
   String? _selectedFarmType;
-  TextEditingController _workerController = TextEditingController();
-  TextEditingController _taskNameController = TextEditingController();
-  TextEditingController _taskTimeController = TextEditingController();
+  final TextEditingController _workerController = TextEditingController();
+  final TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _taskTimeController = TextEditingController();
   int? _totalWorkersAvailable;
   String _workersForTask = '';
   String _taskDuration = '';
 
-  // Updated to include a map of task completion status
-  Map<String, Map<String, dynamic>> _userTasks =
-      {}; // Stores user-defined tasks with status
+  Map<String, Map<String, dynamic>> _userTasks = {};
 
-  // Function to calculate workers needed and duration for a task
   void _calculateWorkersAndTime(String task, int taskTime) {
     if (_totalWorkersAvailable != null && _selectedFarmType != null) {
       int workersNeeded;
@@ -30,10 +37,10 @@ class _LabormananagmentState extends State<Labormananagment> {
 
       if (_selectedFarmType == 'Manual') {
         workersNeeded = (_totalWorkersAvailable! * 0.8).toInt();
-        timeForTask = taskTime; // Time remains the same for manual farms
+        timeForTask = taskTime;
       } else {
         workersNeeded = (_totalWorkersAvailable! * 0.5).toInt();
-        timeForTask = (taskTime * 0.5).toInt(); // Automation speeds up tasks
+        timeForTask = (taskTime * 0.5).toInt();
       }
 
       setState(() {
@@ -43,7 +50,6 @@ class _LabormananagmentState extends State<Labormananagment> {
     }
   }
 
-  // Function to add a new task to the list
   void _addNewTask() {
     String taskName = _taskNameController.text;
     int? taskTime = int.tryParse(_taskTimeController.text);
@@ -52,7 +58,7 @@ class _LabormananagmentState extends State<Labormananagment> {
       setState(() {
         _userTasks[taskName] = {
           'time': taskTime,
-          'completed': false, // New field to track completion
+          'completed': false,
         };
         _taskNameController.clear();
         _taskTimeController.clear();
@@ -64,7 +70,6 @@ class _LabormananagmentState extends State<Labormananagment> {
     }
   }
 
-  // Function to clear completed tasks
   void _clearCompletedTasks() {
     setState(() {
       _userTasks.removeWhere((key, value) => value['completed'] == true);
@@ -72,125 +77,124 @@ class _LabormananagmentState extends State<Labormananagment> {
   }
 
   @override
+  void dispose() {
+    _workerController.dispose();
+    _taskNameController.dispose();
+    _taskTimeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Labour Management'),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Labour Management Content'),
-                SizedBox(height: 20),
-                DropdownButton<String>(
-                  value: _selectedFarmType,
-                  hint: Text('Select Farm Type'),
-                  items: <String>['Automated', 'Manual'].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Labor Management System'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            DropdownButton<String>(
+              value: _selectedFarmType,
+              hint: Text('Select Farm Type'),
+              items: <String>['Automated', 'Manual'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedFarmType = newValue;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _workerController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter total number of workers available',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _totalWorkersAvailable = int.tryParse(value);
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _taskNameController,
+              decoration: InputDecoration(
+                labelText: 'Enter task name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _taskTimeController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter time required for task (in hours)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _addNewTask,
+              child: Text('Add Task'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _clearCompletedTasks,
+              child: Text('Clear Completed Tasks'),
+            ),
+            SizedBox(height: 20),
+            if (_userTasks.isNotEmpty)
+              Column(
+                children: [
+                  Text(
+                    'Available Tasks:',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(height: 10),
+                  ..._userTasks.keys.map((taskName) {
+                    return ListTile(
+                      title: Text(taskName),
+                      subtitle: Text(
+                        'Estimated time: ${_userTasks[taskName]!['time']} hours',
+                      ),
+                      trailing: Checkbox(
+                        value: _userTasks[taskName]!['completed'],
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _userTasks[taskName]!['completed'] = value ?? false;
+                          });
+                        },
+                      ),
+                      onTap: () {
+                        _calculateWorkersAndTime(
+                            taskName, _userTasks[taskName]!['time']);
+                      },
                     );
                   }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _selectedFarmType = newValue;
-                    });
-                  },
-                ),
-                SizedBox(height: 20),
-                TextField(
-                  controller: _workerController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Enter total number of workers available',
-                    border: OutlineInputBorder(),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _totalWorkersAvailable = int.tryParse(value);
-                    });
-                  },
-                ),
-                SizedBox(height: 20),
-                TextField(
-                  controller: _taskNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter task name',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: _taskTimeController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Enter time required for task (in hours)',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: _addNewTask,
-                  child: Text('Add Task'),
-                ),
-                SizedBox(height: 20),
-
-                // Button to clear completed tasks
-                ElevatedButton(
-                  onPressed: _clearCompletedTasks,
-                  child: Text('Clear Completed Tasks'),
-                ),
-
-                SizedBox(height: 20),
-                if (_userTasks.isNotEmpty)
-                  Column(
-                    children: [
-                      Text(
-                        'Available Tasks:',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 10),
-                      ..._userTasks.keys.map((taskName) {
-                        return ListTile(
-                          title: Text(taskName),
-                          subtitle: Text(
-                              'Estimated time: ${_userTasks[taskName]!['time']} hours'),
-                          trailing: Checkbox(
-                            value: _userTasks[taskName]!['completed'],
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _userTasks[taskName]!['completed'] =
-                                    value ?? false;
-                              });
-                            },
-                          ),
-                          onTap: () {
-                            _calculateWorkersAndTime(
-                                taskName, _userTasks[taskName]!['time']);
-                          },
-                        );
-                      }).toList(),
-                    ],
-                  ),
-                SizedBox(height: 20),
-                if (_workersForTask.isNotEmpty)
-                  Text(
-                    _workersForTask,
-                    style: TextStyle(fontSize: 18, color: Colors.blue),
-                  ),
-                SizedBox(height: 10),
-                if (_taskDuration.isNotEmpty)
-                  Text(
-                    _taskDuration,
-                    style: TextStyle(fontSize: 18, color: Colors.green),
-                  ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            SizedBox(height: 20),
+            if (_workersForTask.isNotEmpty)
+              Text(
+                _workersForTask,
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+            SizedBox(height: 10),
+            if (_taskDuration.isNotEmpty)
+              Text(
+                _taskDuration,
+                style: TextStyle(fontSize: 18, color: Colors.green),
+              ),
+          ],
         ),
       ),
     );
