@@ -196,3 +196,23 @@ class _LabormananagmentState extends State<Labormananagment> {
     );
   }
 }
+
+import 'package:flutter/material.dart';
+
+void Main() {
+  runApp( Labormananagment());
+}
+
+class labormananagment extends StatelessWidget {
+  const Labormananagment({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text('Labour Management Content'),
+      ),
+    );
+  }
+}
+ 
