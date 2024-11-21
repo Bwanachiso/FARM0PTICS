@@ -24,14 +24,14 @@ class HomeScreen extends StatelessWidget {
           ElevatedButton(
             onPressed: () => signOutUser(context),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.blue),
-              textStyle: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(Colors.blue),
+              textStyle: WidgetStateProperty.all(
                 const TextStyle(color: Colors.white),
               ),
-              minimumSize: MaterialStateProperty.all(
+              minimumSize: WidgetStateProperty.all(
                 Size(MediaQuery.of(context).size.width / 2.5, 50),
               ),
-            ), 
+            ),
             child: const Text(
               "Sign Out",
               style: TextStyle(color: Colors.white, fontSize: 16),

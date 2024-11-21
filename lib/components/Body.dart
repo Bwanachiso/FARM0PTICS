@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const FarmopticsApp(),
-    const Labormananagment(),
+    const LaborManagement(),
     const Resourcemangement(),
     const comments(),
     const SettingsScreen(),
