@@ -9,10 +9,6 @@ import 'SecondScreen.dart';
 import 'ThirdScreen.dart';
 import 'FourthScreen.dart';
 
-void main() {
-  runApp(const FarmopticsApp());
-}
-
 class FarmopticsApp extends StatelessWidget {
   const FarmopticsApp({super.key});
 

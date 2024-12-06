@@ -16,41 +16,47 @@ class _LaborManagementState extends State<LaborManagement> {
   final TextEditingController _workerController = TextEditingController();
   final TextEditingController _taskNameController = TextEditingController();
   final TextEditingController _taskTimeController = TextEditingController();
-  int? _totalWorkersAvailable;
-  String _workersForTask = '';
-  String _taskDuration = '';
+  final TextEditingController _workerNameController = TextEditingController();
+  final TextEditingController _workerStrengthController =
+      TextEditingController();
 
-  // Stores user-defined tasks with status
-  final Map<String, Map<String, dynamic>> _userTasks = {};
+  Map<String, Map<String, dynamic>> _workers = {}; // Workers' details
+  Map<String, Map<String, dynamic>> _userTasks = {}; // Tasks' details
+
+  String _taskFeedback = '';
 
   @override
   void dispose() {
     _workerController.dispose();
     _taskNameController.dispose();
     _taskTimeController.dispose();
+    _workerNameController.dispose();
+    _workerStrengthController.dispose();
     super.dispose();
   }
 
-  void _calculateWorkersAndTime(String task, int taskTime) {
-    if (_totalWorkersAvailable != null && _selectedFarmType != null) {
-      int workersNeeded;
-      int timeForTask;
+  // Add a new worker
+  void _addWorker() {
+    final String workerName = _workerNameController.text;
+    final String workerStrength = _workerStrengthController.text;
 
-      if (_selectedFarmType == 'Manual') {
-        workersNeeded = (_totalWorkersAvailable! * 0.8).toInt();
-        timeForTask = taskTime;
-      } else {
-        workersNeeded = (_totalWorkersAvailable! * 0.5).toInt();
-        timeForTask = (taskTime * 0.5).toInt();
-      }
-
+    if (workerName.isNotEmpty && workerStrength.isNotEmpty) {
       setState(() {
-        _workersForTask = 'Workers allocated for $task: $workersNeeded';
-        _taskDuration = 'Estimated duration for $task: $timeForTask hours';
+        _workers[workerName] = {
+          'strength': workerStrength,
+          'experience': 0, // Starts with no experience
+        };
+        _workerNameController.clear();
+        _workerStrengthController.clear();
       });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter valid worker details')),
+      );
     }
   }
 
+  // Add a new task
   void _addNewTask() {
     final String taskName = _taskNameController.text;
     final int? taskTime = int.tryParse(_taskTimeController.text);
@@ -71,10 +77,46 @@ class _LaborManagementState extends State<LaborManagement> {
     }
   }
 
-  void _clearCompletedTasks() {
-    setState(() {
-      _userTasks.removeWhere((_, value) => value['completed'] == true);
-    });
+  // Assign task to workers based on strengths and farm type
+  void _assignTask(String taskName) {
+    if (_workers.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No workers available for the task')),
+      );
+      return;
+    }
+
+    final taskDetails = _userTasks[taskName];
+    final int taskTime = taskDetails?['time'] ?? 0;
+
+    List<String> assignedWorkers = [];
+    for (var worker in _workers.entries) {
+      final String name = worker.key;
+      final String strength = worker.value['strength'];
+
+      if (taskName.contains(strength)) {
+        assignedWorkers.add(name);
+      }
+
+      if (assignedWorkers.length >= 3) break; // Limit workers to 3 per task
+    }
+
+    if (assignedWorkers.isNotEmpty) {
+      setState(() {
+        // Update task status
+        _userTasks[taskName]?['completed'] = true;
+
+        // Update worker experience
+        for (var workerName in assignedWorkers) {
+          _workers[workerName]?['experience'] += 10; // Increment experience
+        }
+
+        _taskFeedback =
+            "Task '$taskName' assigned to: ${assignedWorkers.join(', ')}";
+      });
+    } else {
+      _taskFeedback = "No suitable workers found for task '$taskName'.";
+    }
   }
 
   @override
@@ -86,42 +128,72 @@ class _LaborManagementState extends State<LaborManagement> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Labor Management System',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
-            DropdownButton<String>(
-              value: _selectedFarmType,
-              hint: const Text('Select Farm Type'),
-              isExpanded: true,
-              items: <String>['Automated', 'Manual'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedFarmType = newValue;
-                });
-              },
+            const Text(
+              'Labor Management System',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
+
+            // Add Worker Section
+            const Text(
+              'Add Worker:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
             TextField(
-              controller: _workerController,
-              keyboardType: TextInputType.number,
+              controller: _workerNameController,
               decoration: const InputDecoration(
-                labelText: 'Enter total number of workers available',
+                labelText: 'Enter worker name',
                 border: OutlineInputBorder(),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _totalWorkersAvailable = int.tryParse(value);
-                });
-              },
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _workerStrengthController,
+              decoration: const InputDecoration(
+                labelText: 'Enter worker strength (e.g., planting, feeding)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _addWorker,
+              child: const Text('Add Worker'),
             ),
             const SizedBox(height: 20),
+
+            // Worker List
+            if (_workers.isNotEmpty) ...[
+              const Text(
+                'Workers:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _workers.length,
+                itemBuilder: (context, index) {
+                  final workerName = _workers.keys.elementAt(index);
+                  final workerDetails = _workers[workerName]!;
+                  return ListTile(
+                    title: Text(workerName),
+                    subtitle: Text(
+                      'Strength: ${workerDetails['strength']}, Experience: ${workerDetails['experience']}',
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+            ],
+
+            // Add Task Section
+            const Text(
+              'Add Task:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
             TextField(
               controller: _taskNameController,
               decoration: const InputDecoration(
@@ -138,24 +210,17 @@ class _LaborManagementState extends State<LaborManagement> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: _addNewTask,
-                  child: const Text('Add Task'),
-                ),
-                ElevatedButton(
-                  onPressed: _clearCompletedTasks,
-                  child: const Text('Clear Completed Tasks'),
-                ),
-              ],
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _addNewTask,
+              child: const Text('Add Task'),
             ),
             const SizedBox(height: 20),
+
+            // Task List
             if (_userTasks.isNotEmpty) ...[
               const Text(
-                'Available Tasks:',
+                'Tasks:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
@@ -169,34 +234,24 @@ class _LaborManagementState extends State<LaborManagement> {
                     child: ListTile(
                       title: Text(taskName),
                       subtitle: Text(
-                          'Estimated time: ${_userTasks[taskName]!['time']} hours'),
-                      trailing: Checkbox(
-                        value: _userTasks[taskName]!['completed'],
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _userTasks[taskName]!['completed'] = value ?? false;
-                          });
-                        },
+                        'Time: ${_userTasks[taskName]?['time']} hours',
                       ),
-                      onTap: () {
-                        _calculateWorkersAndTime(
-                            taskName, _userTasks[taskName]!['time']);
-                      },
+                      trailing: ElevatedButton(
+                        onPressed: () => _assignTask(taskName),
+                        child: const Text('Assign Task'),
+                      ),
                     ),
                   );
                 },
               ),
+              const SizedBox(height: 10),
             ],
-            const SizedBox(height: 20),
-            if (_workersForTask.isNotEmpty)
+
+            // Feedback Section
+            if (_taskFeedback.isNotEmpty)
               Text(
-                _workersForTask,
+                _taskFeedback,
                 style: const TextStyle(fontSize: 18, color: Colors.blue),
-              ),
-            if (_taskDuration.isNotEmpty)
-              Text(
-                _taskDuration,
-                style: const TextStyle(fontSize: 18, color: Colors.green),
               ),
           ],
         ),
